@@ -41,6 +41,11 @@ Note that running Genymotion emulators and Android virtual devices at the same t
 ```bash
 $ emulator -avd <device-name>
 ...
-emulator: ERROR: Unfortunately, there's an incompatibility between HAXM hypervisor and VirtualBox 4.3.30+ which doesn't allow multiple hypervisors to co-exist.  It is being actively worked on; you can find out more about the issue at http://b.android.com/197915 (Android) and https://www.virtualbox.org/ticket/14294 (VirtualBox)
+emulator: ERROR: Unfortunately, there's an incompatibility between HAXM
+hypervisor and VirtualBox 4.3.30+ which doesn't allow multiple hypervisors
+to co-exist.  It is being actively worked on; you can find out more about
+the issue at http://b.android.com/197915 (Android) and
+https://www.virtualbox.org/ticket/14294 (VirtualBox)
+
 Internal error: initial hax sync failed
 ```
