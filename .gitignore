@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Quick Emulators generates .app files, ignore them:
+.app
