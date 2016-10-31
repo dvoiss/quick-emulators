@@ -36,7 +36,7 @@ The generated app files are tagged with "Emulator" and either "AVD" or "Genymoti
 
 ## Caveats:
 
-Note that running Genymotion emulators and Android virtual devices at the same time does not work. There won't be any error message given if you try to launch one type while the other is running. This can be tested in terminal while running a Genymotion emulator try to start an android emulator with this command:
+Genymotion and Android virtual devices cannot run side by side due to the error below. This happens whether you launch them using Quick Emulators or via a different method. The message below occurs while running a Genymotion emulator.
 
 ```bash
 $ emulator -avd <device-name>
