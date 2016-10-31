@@ -28,7 +28,7 @@ from contextlib import contextmanager
 from glob import glob
 from os import chdir, getcwd, makedirs
 from os.path import expanduser, isdir, isfile, join
-from shutil import copyfile
+from shutil import copyfile, rmtree
 from subprocess import call, Popen, PIPE
 
 __version__ = '0.1.0'
@@ -155,7 +155,7 @@ def write_script_file(name, command_to_execute):
 
 
 def create_app(name, command_to_execute, is_genymotion=False):
-    app_file = "%s.app" % name
+    app_file = "%s/Applications/Quick Emulators/%s.app" % (expanduser('~'), name)
     app_contents = "%s/Contents" % app_file
     app_resources = "%s/Resources" % app_contents
     app_mac_os = "%s/MacOS" % app_contents
@@ -165,13 +165,16 @@ def create_app(name, command_to_execute, is_genymotion=False):
     mkdir_p(app_resources)
     mkdir_p(app_mac_os)
 
+    # create the plist file with the app name
     with cd(app_contents):
         with open("Info.plist", 'w') as f:
             f.write(plist_template.format(**{"app_name": name}))
 
+    # use the genymotion app icon if it exists
     if is_genymotion and isfile(genymotion_icon):
         copyfile(genymotion_icon, "%s/%s.icns" % (app_resources, name))
 
+    # write the script file and set it as executable
     with cd(app_mac_os):
         write_script_file(name, command_to_execute)
         st = os.stat(name)
@@ -182,7 +185,7 @@ def create_app(name, command_to_execute, is_genymotion=False):
     tags = ["Android", "Emulator", ("Genymotion" if is_genymotion else "AVD")]
     write_xattrs(app_file, tags)
 
-    # add app to spot-light index
+    # add app to spotlight index
     call(["mdimport", app_file])
 
 
@@ -194,12 +197,13 @@ def main():
         print('creating .app files for %d Genymotion Virtual Machines' % len(genymotion_vms))
         print('creating .app files for %d Android Virtual Devices' % len(avds))
 
+
+    rmtree("%s/Applications/Quick Emulators" % expanduser('~'), ignore_errors=True)
+
     emulator_path = get_emulator_path()
     if emulator_path:
         for avd in avds:
             create_app(avd, get_avd_launch_command(emulator_path, avd))
-    elif verbose and len(avds) > 0:
-        print('Cannot access "emulator" in Android tools. Skipping creation of %d AVDs' % len(avds))
 
     for vm in genymotion_vms:
         create_app(vm, get_genymotion_launch_command(vm), True)
