@@ -33,3 +33,14 @@ The background daemon watches for changes in the default locations that AVDs and
 The generated app files are tagged with "Emulator" and either "AVD" or "Genymotion". These tags can be used in Spotlight as well:
 
 ![Finding AVD by Tag](https://raw.github.com/dvoiss/quick-emulators/master/screenshots/find-avd.png)
+
+## Caveats:
+
+Note that running Genymotion emulators and Android virtual devices at the same time does not work. There won't be any error message given if you try to launch one type while the other is running. This can be tested in terminal while running a Genymotion emulator try to start an android emulator with this command:
+
+```bash
+$ emulator -avd <device-name>
+...
+emulator: ERROR: Unfortunately, there's an incompatibility between HAXM hypervisor and VirtualBox 4.3.30+ which doesn't allow multiple hypervisors to co-exist.  It is being actively worked on; you can find out more about the issue at http://b.android.com/197915 (Android) and https://www.virtualbox.org/ticket/14294 (VirtualBox)
+Internal error: initial hax sync failed
+```
