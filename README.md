@@ -2,6 +2,8 @@
 
 Launch your Android emulators (Genymotion and AVDs) via Spotlight: ⌘ + Space
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Quick%20Emulators-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/4620)
+
 ![Finding Genymotion Emulator](https://raw.github.com/dvoiss/quick-emulators/master/screenshots/find-genymotion.png)
 
 ## Use
